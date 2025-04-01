@@ -1,0 +1,32 @@
+// Domain Valuator - AI-powered domain investment tool
+// Rules for AI assistant for this codebase
+
+// Project Information
+This is a Next.js application for domain valuation and investment analysis.
+The primary purpose is to help domain resellers find profitable domain investments.
+The app uses a $1.99/week subscription model.
+
+// Structure
+- React components are in src/components
+- Page components are in src/pages
+- API handlers are in src/pages/api
+- Utility functions are in src/utils
+- Global styles are in src/styles
+
+// Code Conventions
+- Use functional components with React hooks
+- Use TailwindCSS for styling
+- Use camelCase for variable and function names
+- Use PascalCase for component names
+- Use descriptive variable and function names
+
+// Feature Information
+- The app analyzes domain investment opportunities
+- Users can set budget constraints and timeframes
+- The app shows potential ROI for domain investments
+- The data is currently mocked but would ideally pull from real APIs
+- Chart.js is used for data visualization
+
+// Deployment
+This app is designed to be deployed on Hostinger hosting service.
+Follow the deployment instructions in the README.md file. 
