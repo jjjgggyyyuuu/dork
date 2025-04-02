@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { getStripe, createCheckoutSession } from '../utils/stripe';
 
 const SubscribeButton = () => {
   const [loading, setLoading] = useState(false);
@@ -10,26 +9,13 @@ const SubscribeButton = () => {
       setLoading(true);
       setError('');
       
-      // Create a Stripe checkout session
-      const { sessionId } = await createCheckoutSession();
+      // Static site doesn't have real payment processing
+      // Display a message or redirect to a static page
+      alert('This is a static demo. In a real app, you would be redirected to Stripe for payment processing.');
       
-      if (!sessionId) {
-        throw new Error('Failed to create checkout session. No session ID returned.');
-      }
+      // Optionally, redirect to a pricing page
+      // window.location.href = '/pricing.html';
       
-      // Redirect to Stripe Checkout
-      const stripe = await getStripe();
-      
-      if (!stripe) {
-        throw new Error('Stripe failed to load. Please check your publishable key.');
-      }
-      
-      const { error: redirectError } = await stripe.redirectToCheckout({ sessionId });
-      
-      if (redirectError) {
-        console.error('Stripe checkout error:', redirectError);
-        throw redirectError;
-      }
     } catch (error) {
       console.error('Subscription error:', error);
       setError('Failed to initiate subscription. Please try again.');
@@ -43,7 +29,7 @@ const SubscribeButton = () => {
       <button
         onClick={handleSubscribe}
         disabled={loading}
-        className={`btn btn-primary ${loading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        className="w-full px-4 py-2 text-white transition-colors duration-150 bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         {loading ? 'Processing...' : 'Subscribe Now'}
       </button>
