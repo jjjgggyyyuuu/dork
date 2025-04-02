@@ -53,7 +53,12 @@ If you encounter issues:
 
 1. **404 Errors**: Check that your .htaccess file was uploaded correctly
 2. **Missing Assets**: Make sure all files from the `out` directory were uploaded
-3. **Blank Page**: Check for JavaScript errors in the browser console
+3. **Blank Page**: 
+   - Check for JavaScript errors in the browser console
+   - Visit `/test.html` to verify if the browser is in Standards Mode or Quirks Mode
+   - Make sure the `.htaccess` file is properly uploaded with Content-Security-Policy headers
+   - Check that your HTML files have proper DOCTYPE declarations
+   - If using Hostinger, ensure that mod_headers is enabled in your hosting account
 
 ## Important Notes
 

@@ -117,6 +117,12 @@ If you encounter issues with your deployment, check the following:
 - **404 Not Found**: Check if the application is running and the Node.js configuration is correct
 - **API Errors**: Verify environment variables and that Stripe keys are correctly set
 - **Subscription Issues**: Check Stripe webhook configuration and logs
+- **Blank Page or Quirks Mode Issues**: 
+  - Make sure the `.htaccess` file is correctly uploaded with Content-Security-Policy headers
+  - Verify HTML files have proper DOCTYPE declarations
+  - Check the browser console for JavaScript errors
+  - Visit `/test.html` to verify if the browser is running in Standards Mode
+  - If still encountering issues, contact Hostinger support to ensure mod_headers is enabled
 
 ## Security Notes
 
