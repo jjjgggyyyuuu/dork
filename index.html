@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Valuator - Find Profitable Domain Investments</title>
+  <style>
+    /* All styles inlined to avoid external dependencies */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+    }
+    .container {
+      text-align: center;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      border-radius: 8px;
+    }
+    h1 {
+      color: #4a69bd;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .search-form {
+      margin: 30px 0;
+    }
+    .search-box {
+      padding: 12px;
+      width: 60%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+    .search-button {
+      padding: 12px 24px;
+      background-color: #4a69bd;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .search-button:hover {
+      background-color: #3a579d;
+    }
+    .feature-box {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    .feature {
+      flex: 1;
+      min-width: 200px;
+      margin: 10px;
+      padding: 15px;
+      background-color: #f0f4f8;
+      border-radius: 6px;
+    }
+    .feature h3 {
+      color: #4a69bd;
+    }
+    .results {
+      margin-top: 30px;
+      text-align: left;
+      display: none;
+    }
+    .domain-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .domain-card h3 {
+      margin-top: 0;
+      color: #4a69bd;
+    }
+    .domain-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .stat {
+      background-color: #f0f4f8;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      display: none;
+    }
+    .domain-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2ecc71;
+      margin: 10px 0;
+    }
+    .buy-button {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .buy-button:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Domain Valuator</h1>
+    <p>Discover profitable domain investment opportunities</p>
+    
+    <div class="search-form">
+      <input type="text" id="search-input" class="search-box" placeholder="Enter a domain name...">
+      <button class="search-button" id="search-button">Search</button>
+    </div>
+    
+    <div class="loading" id="loading">
+      Searching domains...
+    </div>
+    
+    <div class="results" id="results">
+      <!-- Results will be displayed here -->
+    </div>
+    
+    <div class="feature-box" id="feature-box">
+      <div class="feature">
+        <h3>Domain Analysis</h3>
+        <p>Get comprehensive domain metrics and valuation</p>
+      </div>
+      <div class="feature">
+        <h3>Investment Potential</h3>
+        <p>Evaluate ROI and market potential</p>
+      </div>
+      <div class="feature">
+        <h3>Market Trends</h3>
+        <p>Stay updated with domain market trends</p>
+      </div>
+    </div>
+    
+    <p>Start your domain investment journey today for just $1.99/week</p>
+  </div>
+
+  <script>
+    // Domain search and valuation algorithm
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchButton = document.getElementById('search-button');
+      const searchInput = document.getElementById('search-input');
+      const resultsDiv = document.getElementById('results');
+      const featureBox = document.getElementById('feature-box');
+      const loadingDiv = document.getElementById('loading');
+      
+      // Google Search API configuration
+      // Note: In production, you'd want to protect your API key
+      const GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY"; // Replace with your actual API key
+      const SEARCH_ENGINE_ID = "YOUR_SEARCH_ENGINE_ID"; // Replace with your custom search engine ID
+      
+      searchButton.addEventListener('click', function() {
+        const domainName = searchInput.value.trim().toLowerCase();
+        
+        if (domainName.length === 0) {
+          alert('Please enter a domain name to search');
+          return;
+        }
+        
+        // Show loading
+        loadingDiv.style.display = 'block';
+        resultsDiv.style.display = 'none';
+        featureBox.style.display = 'none';
+        
+        // Simple safety function to prevent null/undefined errors
+        const safe = (value) => value === null || value === undefined ? '' : value;
+        
+        // Simulate web search by generating domain statistics - directly call this without fetch
+        simulateWebSearch(domainName).then(domainInfo => {
+          // Hide loading
+          loadingDiv.style.display = 'none';
+          resultsDiv.style.display = 'block';
+          
+          // Display results
+          if (domainInfo) {
+            let html = `
+              <div class="domain-card">
+                <h3>${safe(domainInfo.name)}</h3>
+                <div class="domain-value">Estimated Value: $${safe(domainInfo.value).toLocaleString()}</div>
+                <p>${safe(domainInfo.description)}</p>
+                <div class="domain-stats">
+                  <span class="stat">Category: ${safe(domainInfo.category)}</span>
+                  <span class="stat">Age: ${safe(domainInfo.age)} years</span>
+                  <span class="stat">Monthly Traffic: ${safe(domainInfo.traffic).toLocaleString()}</span>
+                  <span class="stat">SEO Score: ${safe(domainInfo.seoScore)}/100</span>
+                  <span class="stat">ROI Potential: ${safe(domainInfo.potentialROI)}%</span>
+                </div>
+                <div class="domain-stats">
+                  <span class="stat">Length: ${safe(domainInfo.name).length} characters</span>
+                  <span class="stat">Extension: .${safe(domainInfo.extension)}</span>
+                  <span class="stat">Brandability: ${safe(domainInfo.brandability)}/100</span>
+                  <span class="stat">Search Volume: ${safe(domainInfo.searchVolume).toLocaleString()}/month</span>
+                </div>
+                <button class="buy-button">Invest Now</button>
+              </div>
+              
+              <h3>Similar Domain Opportunities</h3>
+            `;
+            
+            // Add similar domains
+            domainInfo.similarDomains.forEach(domain => {
+              html += `
+                <div class="domain-card">
+                  <h3>${safe(domain.name)}</h3>
+                  <div class="domain-value">Estimated Value: $${safe(domain.value).toLocaleString()}</div>
+                  <div class="domain-stats">
+                    <span class="stat">Category: ${safe(domain.category)}</span>
+                    <span class="stat">ROI Potential: ${safe(domain.potentialROI)}%</span>
+                    <span class="stat">Monthly Traffic: ${safe(domain.traffic).toLocaleString()}</span>
+                  </div>
+                  <button class="buy-button">Invest Now</button>
+                </div>
+              `;
+            });
+            
+            resultsDiv.innerHTML = html;
+            
+            // Add event listeners to buy buttons
+            document.querySelectorAll('.buy-button').forEach(button => {
+              button.addEventListener('click', function() {
+                alert('Subscription required to invest in domains. Sign up for just $1.99/week!');
+              });
+            });
+          } else {
+            resultsDiv.innerHTML = '<div class="no-results">No valuation data available for this domain.</div>';
+          }
+        })
+        .catch(error => {
+          console.error('Error in domain search:', error);
+          loadingDiv.style.display = 'none';
+          resultsDiv.style.display = 'block';
+          resultsDiv.innerHTML = '<div class="no-results">Error analyzing domain. Please try again later.</div>';
+        });
+      });
+      
+      // Function to simulate web search and domain analysis
+      async function simulateWebSearch(domainName) {
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Extract domain info
+        let parts = domainName.split('.');
+        let name = parts[0];
+        let extension = parts.length > 1 ? parts[parts.length - 1] : "com";
+        
+        // Normalize domain name for processing
+        const fullDomain = name + '.' + extension;
+        
+        // Generate pseudo-random values based on domain name
+        const hash = hashCode(fullDomain);
+        
+        // Value factors
+        const lengthFactor = Math.max(0, 10 - Math.abs(name.length - 6)) / 10;
+        const extensionFactor = extension === "com" ? 1 : (extension === "net" ? 0.8 : 0.7);
+        const nameFactor = /^[a-zA-Z0-9]+$/.test(name) ? 1 : 0.8;
+        const uniquenessFactor = Math.abs((hash % 100) / 100);
+        
+        // Calculate base value (more realistic range)
+        let value = Math.floor(500 + Math.abs(hash % 10000) * lengthFactor * extensionFactor * nameFactor * uniquenessFactor);
+        
+        // Premium domains (short, common words, etc.)
+        if (name.length <= 4 && /^[a-zA-Z]+$/.test(name)) {
+          value = value * 10; // Short, all-letter domains are valuable
+        }
+        
+        // For certain keywords, increase value
+        const premiumKeywords = ['crypto', 'nft', 'invest', 'buy', 'sell', 'money', 'finance', 'tech', 'ai'];
+        for (const keyword of premiumKeywords) {
+          if (name.includes(keyword)) {
+            value = value * 1.5;
+            break;
+          }
+        }
+        
+        // Category determination
+        const categories = ['Business', 'Technology', 'Entertainment', 'Health', 'Education', 'Shopping', 'Finance', 'Travel'];
+        const categoryIndex = Math.abs(hash) % categories.length;
+        const category = categories[categoryIndex];
+        
+        // Generate other metrics
+        const age = Math.abs(hash % 15) + 1; // 1-15 years
+        const traffic = Math.floor(Math.abs((hash * 7) % 100000) + 100);
+        const brandability = 50 + Math.abs(hash % 50);
+        const seoScore = 60 + Math.abs(hash % 40);
+        const searchVolume = Math.floor(Math.abs((hash * 13) % 50000) + 50);
+        const potentialROI = Math.floor(30 + Math.abs(hash % 70));
+        
+        // Generate description
+        const descriptions = [
+          `${fullDomain} is a ${category.toLowerCase()} domain with significant potential. It has strong SEO metrics and good traffic.`,
+          `This ${category.toLowerCase()} domain offers excellent investment value with its strong brandability and search volume.`,
+          `A premium ${extension} domain in the ${category.toLowerCase()} sector with growing traffic and investment potential.`,
+          `An established domain with ${age} years of history and consistent traffic in the ${category.toLowerCase()} niche.`
+        ];
+        const description = descriptions[Math.abs(hash) % descriptions.length];
+        
+        // Generate similar domains
+        const similarDomains = [];
+        const prefixes = ['my', 'best', 'top', 'pro', 'e'];
+        const suffixes = ['hub', 'spot', 'zone', 'central', 'place'];
+        
+        // Create 3 similar domains
+        for (let i = 0; i < 3; i++) {
+          let similarName;
+          if (i === 0) {
+            // Prefix version
+            similarName = prefixes[Math.abs((hash + i) % prefixes.length)] + name;
+          } else if (i === 1) {
+            // Suffix version
+            similarName = name + suffixes[Math.abs((hash + i) % suffixes.length)];
+          } else {
+            // Alternative extension
+            similarName = name;
+          }
+          
+          const altExtensions = ['com', 'net', 'org', 'io', 'co'];
+          const similarExtension = (i === 2) 
+            ? altExtensions.filter(ext => ext !== extension)[Math.abs((hash + i) % 4)]
+            : extension;
+            
+          // Calculate similar domain value (typically less than the searched domain)
+          const similarValue = Math.floor(value * (0.4 + (Math.abs((hash * (i+1)) % 40) / 100)));
+          
+          similarDomains.push({
+            name: similarName + '.' + similarExtension,
+            value: similarValue,
+            category: categories[Math.abs((hash + i * 100) % categories.length)],
+            traffic: Math.floor(traffic * (0.3 + (Math.abs((hash * (i+1)) % 70) / 100))),
+            potentialROI: Math.floor(potentialROI * (0.8 + (Math.abs((hash * (i+2)) % 40) / 100)))
+          });
+        }
+        
+        return {
+          name: fullDomain,
+          value: value,
+          category: category,
+          age: age,
+          extension: extension,
+          traffic: traffic,
+          brandability: brandability,
+          seoScore: seoScore,
+          searchVolume: searchVolume,
+          potentialROI: potentialROI,
+          description: description,
+          similarDomains: similarDomains
+        };
+      }
+      
+      // Simple string hash function
+      function hashCode(str) {
+        // More reliable hash function
+        let hash = 0;
+        if (str.length === 0) return hash;
+        
+        for (let i = 0; i < str.length; i++) {
+          const char = str.charCodeAt(i);
+          hash = ((hash << 5) - hash) + char;
+          hash = Math.abs(hash); // Ensure positive value
+        }
+        return hash;
+      }
+      
+      // Allow pressing Enter to search
+      searchInput.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+          searchButton.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html> 
