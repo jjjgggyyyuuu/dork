@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Define the base directory for static files
-$staticDir = __DIR__ . '/out';
+$staticDir = __DIR__;
 
 // Get the requested URI
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -18,19 +18,46 @@ if ($requestPath === '') {
     $requestPath = '/index';
 }
 
+// Handle Stripe API requests
+if ($requestPath === '/stripe-handler.php') {
+    // Include the Stripe handler file
+    include_once __DIR__ . '/stripe-handler.php';
+    exit;
+}
+
 // Map API requests
 if (strpos($requestPath, '/api/') === 0) {
     // Handle API requests - domain data
     if ($requestPath === '/api/domains') {
         header('Content-Type: application/json');
-        if (file_exists(__DIR__ . '/out/api/domains.json')) {
-            echo file_get_contents(__DIR__ . '/out/api/domains.json');
+        if (file_exists(__DIR__ . '/api/domains.json')) {
+            echo file_get_contents(__DIR__ . '/api/domains.json');
         } else {
             echo json_encode(['error' => 'Domain data not found']);
         }
         exit;
     }
-    // Add other API endpoints as needed
+    
+    // Handle API requests - create checkout session
+    if ($requestPath === '/api/create-checkout-session') {
+        // Redirect to Stripe handler
+        header('Location: /stripe-handler.php?action=create_session');
+        exit;
+    }
+    
+    // Handle API requests - create portal link
+    if ($requestPath === '/api/create-portal-link') {
+        // Redirect to Stripe handler
+        header('Location: /stripe-handler.php?action=create_portal');
+        exit;
+    }
+    
+    // Handle API requests - webhooks
+    if ($requestPath === '/api/webhooks') {
+        // Redirect to Stripe handler
+        header('Location: /stripe-handler.php?action=webhook');
+        exit;
+    }
 }
 
 // Detect browser mode and add script to fix Quirks Mode if needed
