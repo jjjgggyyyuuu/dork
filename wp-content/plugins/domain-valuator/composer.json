@@ -1,0 +1,21 @@
+{
+  "name": "domain-valuator/wordpress-plugin",
+  "description": "AI-powered domain valuation tool for domain resellers to find profitable domain investments",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=7.2",
+    "stripe/stripe-php": "^10.0",
+    "composer/installers": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "DomainValuator\\": "includes/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
+} 

@@ -1,0 +1,244 @@
+/*
+Theme Name: Domain Valuator
+Theme URI: https://example.com/domain-valuator-theme
+Author: Your Name
+Author URI: https://example.com
+Description: A custom theme designed for the Domain Valuator plugin, focused on domain investment analysis
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: domain-valuator
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+*/
+
+/* Base Styles */
+html {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #4e73df;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #375dc0;
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #212529;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Layout */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.site-header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 20px 0;
+}
+
+.site-branding {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.site-description {
+    margin: 5px 0 0;
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+/* Navigation */
+.main-navigation {
+    background-color: #4e73df;
+    padding: 10px 0;
+}
+
+.main-navigation ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-navigation li {
+    margin: 0 15px;
+}
+
+.main-navigation a {
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.main-navigation a:hover {
+    background-color: rgba(255,255,255,0.1);
+    text-decoration: none;
+}
+
+/* Content */
+.site-content {
+    padding: 40px 0;
+}
+
+.site-main {
+    margin-bottom: 40px;
+}
+
+.entry-header {
+    margin-bottom: 30px;
+}
+
+.entry-title {
+    font-size: 2.25rem;
+    margin-bottom: 10px;
+}
+
+.entry-meta {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.entry-content {
+    margin-bottom: 30px;
+}
+
+.entry-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Sidebar */
+.widget-area {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.widget {
+    margin-bottom: 30px;
+}
+
+.widget-title {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Footer */
+.site-footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.site-footer a {
+    color: #fff;
+}
+
+.site-info {
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-navigation ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-navigation li {
+        margin: 5px 0;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.75rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Compatibility with Domain Valuator plugin */
+.domain-valuator-container {
+    margin: 30px 0;
+} 

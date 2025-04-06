@@ -12,21 +12,22 @@ The app uses a $1.99/week subscription model.
 - API handlers are in src/pages/api
 - Utility functions are in src/utils
 - Global styles are in src/styles
+// put the most important files in the root folder
+place the most important files at the top
+
 
 // Code Conventions
-- Use functional components with React hooks
-- Use TailwindCSS for styling
-- Use camelCase for variable and function names
-- Use PascalCase for component names
-- Use descriptive variable and function names
+- use whatever is most compatible with wordpress
+
+
 
 // Feature Information
 - The app analyzes domain investment opportunities
 - Users can set budget constraints and timeframes
 - The app shows potential ROI for domain investments
-- The data is currently mocked but would ideally pull from real APIs
 - Chart.js is used for data visualization
+// never use mock data, always use real data
+
 
 // Deployment
-This app is designed to be deployed on Hostinger hosting service.
-Follow the deployment instructions in the README.md file. 
+This app is designed to be deployed on Hostinger hosting service in collaboration with my wordpress website.

@@ -1,40 +1,13 @@
-# Enable rewrite engine
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
 RewriteEngine On
-
-# Set base directory
 RewriteBase /
-
-# Allow direct access to static files
-<FilesMatch "\.(css|js|ico|gif|jpg|png|svg|woff|woff2|ttf|eot)$">
-    Order Allow,Deny
-    Allow from all
-</FilesMatch>
-
-# Handle Next.js static files and images directly
-RewriteCond %{REQUEST_URI} ^/_next/static/ [OR]
-RewriteCond %{REQUEST_URI} ^/_next/image/ [OR]
-RewriteCond %{REQUEST_URI} ^/static/
-RewriteRule (.*) $1 [L]
-
-# Handle API routes directly
-RewriteCond %{REQUEST_URI} ^/api/
-RewriteRule (.*) $1 [L]
-
-# Route everything else through index.php
+RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [L,QSA]
-
-# Security headers
-<IfModule mod_headers.c>
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-XSS-Protection "1; mode=block"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header always set Access-Control-Allow-Origin "*"
-    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
-    Header always set Access-Control-Allow-Headers "*"
+RewriteRule . /index.php [L]
 </IfModule>
+# END WordPress
 
 # Enable compression
 <IfModule mod_deflate.c>
@@ -56,8 +29,22 @@ RewriteRule ^(.*)$ index.php [L,QSA]
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresDefault "access plus 2 days"
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
 # Prevent directory listing

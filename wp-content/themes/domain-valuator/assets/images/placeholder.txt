@@ -1,0 +1,10 @@
+This directory is for theme images. 
+
+In a production environment, this would contain:
+- logo.png
+- placeholder.jpg
+- featured images
+- background images
+- other theme assets
+
+For development purposes, this placeholder file ensures the directory exists. 

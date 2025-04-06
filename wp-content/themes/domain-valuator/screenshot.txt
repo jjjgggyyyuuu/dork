@@ -1,0 +1,8 @@
+This file is a placeholder for the screenshot.png that should be created.
+
+A proper WordPress theme should have a screenshot.png file in the theme's root directory with the following specifications:
+- Dimensions: 1200px x 900px
+- Format: PNG
+- The screenshot should represent the theme's appearance
+
+Please replace this text file with an actual PNG image of the theme. 
